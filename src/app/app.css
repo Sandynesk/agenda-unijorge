@@ -1,0 +1,68 @@
+.app-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.app-header {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.app-header h1 {
+  font-size: 1.85rem;
+  font-weight: 800;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.nav-bar {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-bar a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 8px 18px;
+  border-radius: 999px;
+  transition: all 0.25s ease;
+  border: 1px solid transparent;
+}
+
+.nav-bar a:hover {
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+.nav-bar a.active {
+  background: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.app-content {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  box-shadow: var(--card-shadow);
+  min-height: 220px;
+}
