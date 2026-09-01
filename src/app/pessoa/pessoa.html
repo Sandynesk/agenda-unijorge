@@ -1,2 +1,44 @@
-<h2>{{ nome }}</h2>
-<p>{{ curso }}</p>
+<div class="pessoas-wrapper">
+  <h2>Lista de Pessoas e Validações</h2>
+
+  @if (avisosLista.length > 0) {
+    <div class="alerta-ids">
+      @for (aviso of avisosLista; track aviso) {
+        <p>⚠️ {{ aviso }}</p>
+      }
+    </div>
+  }
+
+  <div class="cards-grid">
+    @for (item of resultados; track $index) {
+      <div class="pessoa-card" [class.invalido]="item.erros.length > 0">
+        <div class="card-header">
+          <h3>{{ item.pessoa.nome }}</h3>
+          <span class="badge" [class.badge-erro]="item.erros.length > 0" [class.badge-ok]="item.erros.length === 0">
+            {{ item.erros.length > 0 ? 'Inválido' : 'Válido' }}
+          </span>
+        </div>
+
+        <div class="card-body">
+          <p><strong>ID:</strong> {{ item.pessoa.id }}</p>
+          <p><strong>Curso:</strong> {{ item.pessoa.curso }}</p>
+          <p><strong>E-mail:</strong> {{ item.pessoa.email }}</p>
+          <p><strong>Telefone:</strong> {{ item.pessoa.telefone || '(Não informado)' }}</p>
+          <p><strong>Vínculo:</strong> {{ item.pessoa.vinculo }}</p>
+          <p><strong>Status:</strong> {{ item.pessoa.ativo ? 'Ativo' : 'Inativo' }}</p>
+        </div>
+
+        @if (item.erros.length > 0) {
+          <div class="card-erros">
+            <strong>Erros encontrados:</strong>
+            <ul>
+              @for (erro of item.erros; track erro) {
+                <li>{{ erro }}</li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>
