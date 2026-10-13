@@ -15,10 +15,16 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should direct the Eventos menu to the cadastro form route', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
+
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, agenda-unijorge');
+    const eventosLink = Array.from(compiled.querySelectorAll('a')).find(
+      (link) => link.textContent?.trim() === 'Eventos'
+    );
+
+    expect(eventosLink).toBeTruthy();
+    expect(eventosLink?.getAttribute('ng-reflect-router-link')).toBe('/eventos/novo');
   });
 });
