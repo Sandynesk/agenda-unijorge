@@ -1,0 +1,117 @@
+<div class="card-empresa">
+  <h2 class="titulo-empresa">Cadastro da empresa</h2>
+
+  <form class="form-empresa" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-grupo">
+      <label for="nome">Nome</label>
+      <input
+        type="text"
+        id="nome"
+        name="nome"
+        [(ngModel)]="empresa.nome"
+        (blur)="marcarComoTocado('nome')"
+        (input)="atualizarCampoSeTocado('nome')"
+        [class.invalido]="mostrarErro('nome')"
+      >
+      @if (mostrarErro('nome')) {
+        <small class="erro">{{ erros.nome }}</small>
+      }
+    </div>
+
+    <div class="form-grupo">
+      <label for="cnpj">CNPJ</label>
+      <input
+        type="text"
+        id="cnpj"
+        name="cnpj"
+        [(ngModel)]="empresa.cnpj"
+        (blur)="marcarComoTocado('cnpj')"
+        (input)="atualizarCampoSeTocado('cnpj')"
+        [class.invalido]="mostrarErro('cnpj')"
+      >
+      @if (mostrarErro('cnpj')) {
+        <small class="erro">{{ erros.cnpj }}</small>
+      }
+    </div>
+
+    <div class="form-grupo">
+      <label for="logomarca">Logomarca</label>
+      <input
+        type="url"
+        id="logomarca"
+        name="logomarca"
+        [(ngModel)]="empresa.logomarca"
+        (blur)="marcarComoTocado('logomarca')"
+        (input)="atualizarCampoSeTocado('logomarca')"
+        [class.invalido]="mostrarErro('logomarca')"
+      >
+      @if (mostrarErro('logomarca')) {
+        <small class="erro">{{ erros.logomarca }}</small>
+      }
+    </div>
+
+    <div class="form-grupo">
+      <label for="fundacao">Fundação</label>
+      <input
+        type="date"
+        id="fundacao"
+        name="fundacao"
+        [(ngModel)]="empresa.fundacao"
+        (blur)="marcarComoTocado('fundacao')"
+        (input)="atualizarCampoSeTocado('fundacao')"
+        [class.invalido]="mostrarErro('fundacao')"
+      >
+      @if (mostrarErro('fundacao')) {
+        <small class="erro">{{ erros.fundacao }}</small>
+      }
+    </div>
+
+    <div class="form-grupo">
+      <label for="descricao">Descrição</label>
+      <textarea
+        id="descricao"
+        name="descricao"
+        rows="4"
+        [(ngModel)]="empresa.descricao"
+        (blur)="marcarComoTocado('descricao')"
+        (input)="atualizarCampoSeTocado('descricao')"
+        [class.invalido]="mostrarErro('descricao')"
+      ></textarea>
+      @if (mostrarErro('descricao')) {
+        <small class="erro">{{ erros.descricao }}</small>
+      }
+    </div>
+
+    <div class="form-acoes">
+      <button type="button" class="btn-limpar" (click)="limparFormulario()">Limpar</button>
+      <button type="submit" class="btn-enviar" [disabled]="temErro()">Enviar</button>
+    </div>
+  </form>
+
+  <section class="lista-empresas">
+    <h3>Empresas enviadas</h3>
+
+    @if (empresasEnviadas.length > 0) {
+      @for (empresaSalva of empresasEnviadas; track empresaSalva.cnpj) {
+        <article class="empresa-item">
+          <div class="empresa-imagem">
+            @if (empresaSalva.logomarca) {
+              <img [src]="empresaSalva.logomarca" [alt]="empresaSalva.nome" />
+            } @else {
+              <span>Logo</span>
+            }
+          </div>
+
+          <div class="empresa-info">
+            <strong>{{ empresaSalva.nome }}</strong>
+            <p><span>CNPJ:</span> {{ empresaSalva.cnpj }}</p>
+            <p><span>Fundação:</span> {{ empresaSalva.fundacao }}</p>
+            <p>{{ empresaSalva.descricao }}</p>
+          </div>
+        </article>
+      }
+    } @else {
+      <p class="lista-vazia">Nenhuma empresa cadastrada ainda.</p>
+    }
+  </section>
+</div>
